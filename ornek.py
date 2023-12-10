@@ -7,7 +7,7 @@ api = Api(app)
         
 class Users(Resource):
     def get(self):
-        data = pd.read_csv('info.csv')
+        data = pd.read_csv('kullanici.csv')
         data = data.to_dict('records')
         return {'data' : data}, 200
 
@@ -21,19 +21,19 @@ class Users(Resource):
             'age'       : [age],
             'city'      : [city]
         })
-        data = pd.read_csv('info.csv')
+        data = pd.read_csv('kullanici.csv')
         data = data.append(req_data, ignore_index=True)
-        data.to_csv('info.csv', index=False)
-        return {'message' : 'Kayit basariyla eklendi.'}, 200
+        data.to_csv('kullanici.csv', index=False)
+        return {'message' : 'Kullanici basariyla eklendi.'}, 200
 
 class Name(Resource):
     def get(self,name):
-        data = pd.read_csv('info.csv')
+        data = pd.read_csv('kullanici.csv')
         data = data.to_dict('records')
         for entry in data:
             if entry['name'] == name :
                 return {'data' : entry}, 200
-        return {'message' : 'No entry found with this name !'}, 404
+        return {'message' : 'Bu girise ait bir isim bulunamadi !'}, 404
 
 
 
